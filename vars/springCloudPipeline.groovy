@@ -29,6 +29,8 @@ def call(Map pipelineParams) {
             profile = "${pipelineParams.profile}"
         }
 
+        def killShell = "ps -ef | grep ${serviceName}.jar | grep -v grep | awk '{print \\\$2}'  | sed -e \\\"s/^/kill -9 /g\\\" | sh -"
+
         stages {
 
             //下架服务
@@ -69,8 +71,9 @@ def call(Map pipelineParams) {
 
             //发布服务到服务器中并启动
             stage('deploy') {
+
                 steps {
-                    def killShell = "ps -ef | grep ${serviceName}.jar | grep -v grep | awk '{print \\\$2}'  | sed -e \\\"s/^/kill -9 /g\\\" | sh -"
+
                     //关闭原服务
                     sh "/usr/local/bin/sshpass -f ${serverPassWordFile} ssh " + "${serverUserName}@${serverIp}" + " 'sh ${killShell}'"
                     //上传新的jar包到服务器中
