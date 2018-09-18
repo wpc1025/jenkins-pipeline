@@ -7,5 +7,7 @@ codeCredentialsId:'rookieGiteeAccount',
 serverUserName:'root',
 serverIp:'101.201.236.89',
 serverServiceRootFolder:'~/eshop/services/',
-serviceName:'eureka',
-serviceId:'172.17.230.128:ORDER:10005')
+serviceName:'admin',
+serviceId:'172.17.230.128:ADMIN:8070',
+serverPassWordFile:'/var/lib/jenkins/10120123689',
+profile:'--spring.profiles.active=dev')
