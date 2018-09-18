@@ -27,9 +27,9 @@ def call(Map pipelineParams) {
             serviceId = "${pipelineParams.serviceId}"
             //代码所用环境
             profile = "${pipelineParams.profile}"
-        }
 
-        def killShell = "ps -ef | grep ${serviceName}.jar | grep -v grep | awk '{print \\\$2}'  | sed -e \\\"s/^/kill -9 /g\\\" | sh -"
+            killShell = "ps -ef | grep ${pipelineParams.serviceName}.jar | grep -v grep | awk '{print \$2}'  | sed -e \"s/^/kill -9 /g\" | sh -"
+        }
 
         stages {
 
