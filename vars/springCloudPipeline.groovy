@@ -25,6 +25,8 @@ def call(Map pipelineParams) {
             serviceName = "${pipelineParams.serviceName}"
             //服务在eureka中的ID
             serviceId = "${pipelineParams.serviceId}"
+            //代码所用环境
+            profile = "${pipelineParams.profile}"
         }
 
         stages {
@@ -73,7 +75,7 @@ def call(Map pipelineParams) {
                     //上传新的jar包到服务器中
                     sh "/usr/local/bin/sshpass -f ${serverPassWordFile} scp  ${serviceName}/target/${serviceName}.jar " + "${serverUserName}" + "@" + "${serverIp}" + ":" + "${serverServiceRootFolder}${serviceName}/"
                     //启动服务
-                    sh "/usr/local/bin/sshpass -f ${serverPassWordFile} ssh " + "${serverUserName}@${serverIp}" + " 'nohup java -jar ${serverServiceRootFolder}${serviceName}/${serviceName}.jar --spring.profiles.active=dev > /dev/null &'"
+                    sh "/usr/local/bin/sshpass -f ${serverPassWordFile} ssh " + "${serverUserName}@${serverIp}" + " 'nohup java -jar ${serverServiceRootFolder}${serviceName}/${serviceName}.jar ${profile} > /dev/null &'"
                 }
             }
 

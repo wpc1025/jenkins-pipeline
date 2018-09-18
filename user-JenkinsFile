@@ -9,4 +9,5 @@ serverIp:'101.201.236.89',
 serverServiceRootFolder:'~/eshop/services/',
 serviceName:'user',
 serviceId:'172.17.230.128:ORDER:10005',
-serverPassWordFile:'/Users/a1/password/127001')
+serverPassWordFile:'/Users/a1/password/127001',
+profile:'')
