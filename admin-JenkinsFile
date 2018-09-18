@@ -8,4 +8,5 @@ serverUserName:'a1',
 serverIp:'127.0.0.1',
 serverServiceRootFolder:'~/eshop/services/',
 serviceName:'admin',
-serviceId:'192.168.1.88:ADMIN:8070')
+serviceId:'192.168.1.88:ADMIN:8070',
+serverPassWordFile:'/Users/a1/password/127001')
