@@ -1,0 +1,11 @@
+@Library('springCloudPipeline') _
+
+springCloudPipeline(scmUrl:'https://gitee.com/havefun2017/eshop.git',
+branch:'develop',
+eurekaAddress:'http://127.0.0.1:10000/',
+codeCredentialsId:'rookieGiteeAccount',
+serverUserName:'root',
+serverIp:'101.201.236.89',
+serverServiceRootFolder:'~/eshop/services/',
+serviceName:'admin',
+serviceId:'172.17.230.128:ORDER:10005')
