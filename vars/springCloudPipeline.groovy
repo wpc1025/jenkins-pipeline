@@ -18,11 +18,15 @@ def call(Map pipelineParams) {
             serverIp = "${pipelineParams.serverIp}"
             //远程服务器中存放服务实例的位置
             serverServiceRootFolder = "${pipelineParams.serverServiceRootFolder}"
+            //存储远程服务器密码的文件路径
+            serverPassWordFile = "${pipelineParams.serverPassWordFile}"
 
             //服务名称
             serviceName = "${pipelineParams.serviceName}"
             //服务在eureka中的ID
             serviceId = "${pipelineParams.serviceId}"
+            //代码所用环境
+            profile = "${pipelineParams.profile}"
         }
 
         stages {
@@ -67,11 +71,11 @@ def call(Map pipelineParams) {
             stage('deploy') {
                 steps {
                     //关闭原服务
-                    sh "/usr/local/bin/sshpass -f /var/lib/jenkins/10120123689 ssh " + "${serverUserName}@${serverIp}" + " 'sh ${serverServiceRootFolder}${serviceName}/kill.sh'"
+                    sh "/usr/local/bin/sshpass -f ${serverPassWordFile} ssh " + "${serverUserName}@${serverIp}" + " 'sh ${serverServiceRootFolder}${serviceName}/kill.sh'"
                     //上传新的jar包到服务器中
-                    sh "/usr/local/bin/sshpass -f /var/lib/jenkins/10120123689 scp  ${serviceName}/target/${serviceName}.jar " + "${serverUserName}" + "@" + "${serverIp}" + ":" + "${serverServiceRootFolder}${serviceName}/"
+                    sh "/usr/local/bin/sshpass -f ${serverPassWordFile} scp  ${serviceName}/target/${serviceName}.jar " + "${serverUserName}" + "@" + "${serverIp}" + ":" + "${serverServiceRootFolder}${serviceName}/"
                     //启动服务
-                    sh "/usr/local/bin/sshpass -f /var/lib/jenkins/10120123689 ssh " + "${serverUserName}@${serverIp}" + " 'nohup java -jar ${serverServiceRootFolder}${serviceName}/${serviceName}.jar --spring.profiles.active=dev > /dev/null &'"
+                    sh "/usr/local/bin/sshpass -f ${serverPassWordFile} ssh " + "${serverUserName}@${serverIp}" + " 'nohup java -jar ${serverServiceRootFolder}${serviceName}/${serviceName}.jar ${profile} > /dev/null &'"
                 }
             }
 
