@@ -3,7 +3,7 @@
 springCloudPipeline(scmUrl:'https://gitee.com/havefun2017/eshop.git',
 branch:'develop',
 eurekaAddress:'http://127.0.0.1:10000/',
-codeCredentialsId:'rookieGiteeAccount',
+codeCredentialsId:'giteeAccount',
 serverUserName:'root',
 serverIp:'101.201.236.89',
 serverServiceRootFolder:'~/eshop/services/',
