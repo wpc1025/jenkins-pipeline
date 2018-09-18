@@ -8,4 +8,6 @@ serverUserName:'root',
 serverIp:'101.201.236.89',
 serverServiceRootFolder:'~/eshop/services/',
 serviceName:'order',
-serviceId:'172.17.230.128:ORDER:10005')
+serviceId:'172.17.230.128:ORDER:10005',
+serverPassWordFile:'/var/lib/jenkins/10120123689',
+profile:'--spring.profiles.active=dev')
